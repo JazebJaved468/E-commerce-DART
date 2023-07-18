@@ -36,6 +36,7 @@ void askUser() {
   var userInput = stdin.readLineSync()!;
   // return userInput;
 
+  // Doing operations depending on user
   doOperations(userInput);
 }
 
