@@ -1,11 +1,11 @@
 List<Map<String, dynamic>> customers = [
   // list is map with string keys and dynamic values
   {
-    'name': "Jazeb",
-    'email': "jazeb52",
+    'name': "Raza",
+    'email': "raza33",
     'contact': "0307",
-    'address': "flat 100",
-    'password': "jazeb123"
+    'address': "flat 400",
+    'password': "raza123"
   },
   {
     'name': "Ali",
