@@ -83,6 +83,7 @@ void registerUser() {
   stdout.write("Enter Name: ");
   var customerName = stdin.readLineSync()!;
 
+
   // getting customer E-mail
   stdout.write("Enter Email: ");
   var customerEmail = stdin.readLineSync()!;
@@ -101,7 +102,7 @@ void registerUser() {
 
   // adding customer map to customers list
   customers.add({
-    'name': customerName,
+    'name': toSentenceCase(customerName),
     'email': customerEmail,
     'contact': customerContact,
     'address': customerAddress,
@@ -143,6 +144,19 @@ void userLogin() {
   }
 }
 
+String toSentenceCase(String input) {
+  if (input.isEmpty) {
+    return input;
+  }
+  
+  String firstLetter = input.substring(0, 1).toUpperCase();
+  String restOfString = input.substring(1).toLowerCase();
+  
+  return '$firstLetter$restOfString';
+}
+
+
+// COLORS AND FORMATTING
 // \u001b[1m: Sets the text style to bold.
 // \u001b[32m: Sets the text color to green.
 // \u001b[0m: Resets the text style and color to the default.
