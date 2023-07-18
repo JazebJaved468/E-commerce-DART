@@ -53,16 +53,22 @@ void doOperations(user) {
 }
 
 adminLogin() {
+  // getting admin username
   stdout.write("Enter Username: ");
   var adminName = stdin.readLineSync()!;
+
+  // getting admin password
   stdout.write("Enter Password: ");
   var adminPassword = stdin.readLineSync();
 
+  // Assumption: Username is case sensitive (that's why used toLOwerCase())
   if((adminName.toLowerCase() == "jazeb" && adminPassword == "jazeb") || (adminName.toLowerCase() == "arbaz" && adminPassword == "arbaz")){
     print("\u001b[1m\u001b[32mWelcome to Admin Panel\u001b[0m");
   }
   else{
     print("\u001b[31mSorry: Incorrect Credentials\u001b[0m");
+
+    // again asking user to select options
     askUser();
   }
 }
