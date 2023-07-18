@@ -20,13 +20,13 @@ var loggedInCustomer = "No one is Login currently";
 void main() {
   //Starting the Program---Welcome Message
   start();
-
-  // asking user to login as
-  askUser();
 }
 
 void start() {
   print('\u001b[1m\u001b[32m======== Welcome to E-SHOP ========\u001b[0m');
+
+  // asking user to login as
+  askUser();
 }
 
 void askUser() {
@@ -107,7 +107,8 @@ void registerUser() {
     'email': customerEmail,
     'contact': customerContact,
     'address': customerAddress,
-    'password': customerPassword
+    'password': customerPassword,
+    'cart': []
   });
 
   print("\u001b[1m\u001b[32m You are successfully registered\u001b[0m");
@@ -158,56 +159,100 @@ askShowProducts() {
   showProducts(userInp);
 }
 
-showProducts(String userInp){
-  if(userInp == "1"){
+showProducts(String userInp) {
+  if (userInp == "1") {
     showAll();
-  }
-  else if(userInp == '2'){
+  } else if (userInp == '2') {
     showProductList('BAGS', bags);
-  }
-    else if(userInp == '3'){
+  } else if (userInp == '3') {
     showProductList('FRAGRANCES', fragrance);
-  }
-    else if(userInp == '4'){
+  } else if (userInp == '4') {
     showProductList('JEWELRY', jewelry);
-  }
-  else{
+  } else {
     logoutCustomer();
   }
 }
 
-void showProductList(String productTitle, List productList, {int counter=1} ){
-  // var productTitle = "BAGS";
-  // var productList = bags;
+void showProductList(String productTitle, List productList) {
   print("\u001b[1m\u001b[35m$productTitle\u001b[0m");
   for (var i = 0; i < productList.length; i++) {
     print("${productList[i]['id']} : ${productList[i]['name']}");
-    counter++;
   }
+
+  // asking user to select options like itemdetails, cart etc
+  askOptions();
 }
 
-void showAll(){
+void showAll() {
   List<String> titles = ['BAGS', 'FRAGRANCES', 'JEWELRY'];
   List<List> productLists = [bags, fragrance, jewelry];
   for (var i = 0; i < 3; i++) {
-    if(i == 1 ){
-        showProductList(titles[i], productLists[i], counter: bags.length + 1);  
-    }
-    else if(i == 2 ){
-        showProductList(titles[i], productLists[i], counter: bags.length +1 + fragrance.length);  
-    }
-    else{
-    showProductList(titles[i], productLists[i]);    
-  }
+    showProductList(titles[i], productLists[i]);
   }
 }
 
+void askOptions() {
+  print("\u001b[36mEnter (1,2,3,4): ");
+  print("1: Show product details");
+  print("2: Add to cart ");
+  print("3: Remove from Cart");
+  print("4: Show Cart");
+  print("5 (or any key): Logout \u001b[0m");
 
+  stdout.write("Enter: ");
+  var optionSelected = stdin.readLineSync()!;
 
+  if (optionSelected == "1") {
+    stdout.write("Enter Product ID: ");
+    var productId = stdin.readLineSync()!;
+    var prodId = productId.toLowerCase();
+    if (prodId[0].toLowerCase() == "b") {
+      showItemDetails(prodId, bags, "Bag");
+    } else if (prodId[0] == "f") {
+      showItemDetails(prodId, fragrance, "Fragrance");
+    } else if (prodId[0] == "j") {
+      showItemDetails(prodId, jewelry, "Jewelry");
+    } else {
+      print(
+          "\u001b[1m\u001b[31mSorry, Product not found. Write correct ID\u001b[0m");
+    }
+  }
 
+  // Again asking options
+  askOptions();
+}
 
-void logoutCustomer(){
-  print("\u001b[1m\u001b[32mSuccessfully Logout From ($loggedInCustomer)\u001b[0m");
+void showItemDetails(String id, List productList, String categoryName) {
+  bool isFound = false;
+
+  for (var i = 0; i < productList.length; i++) {
+    if (isFound == false) {
+      if (id == productList[i]['id']) {
+        isFound = true;
+        print('\u001b[1m\u001b[35mSelected $categoryName Details:\u001b[0m');
+        var productKeys = productList[i]
+            .keys; // this is an iterable --- converting into list bcz [] arenot working with iterables
+        List productKeysList = productKeys.toList(); // this is list
+        for (var key = 0; key < productKeys.length; key++) {
+          print(
+              '${productKeysList[key].toUpperCase()} : ${productList[i][productKeysList[key]]}');
+        }
+      }
+    } else {
+      break;
+    }
+  }
+
+  // checked all items... if still not found then product with id doenot exist or customer has inputted wrong id
+  if (isFound == false) {
+    print(
+        "\u001b[1m\u001b[31mSorry, Product not found... Write correct ID\u001b[0m");
+  }
+}
+
+void logoutCustomer() {
+  print(
+      "\u001b[1m\u001b[32mSuccessfully Logout From ($loggedInCustomer)\u001b[0m");
 
   //setting logincustomer to no-one
   loggedInCustomer = "No one is currently login";

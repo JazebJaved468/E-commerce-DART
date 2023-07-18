@@ -5,13 +5,15 @@ List<Map<String, dynamic>> customers = [
     'email': "raza33",
     'contact': "0307",
     'address': "flat 400",
-    'password': "raza"
+    'password': "raza",
+    'cart': []
   },
   {
     'name': "Ali",
     'email': "a",
     'contact': "0345",
     'address': "flat 200",
-    'password': "a"
+    'password': "a",
+    'cart': []
   }
 ];
