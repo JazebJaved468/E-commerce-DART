@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'bags.dart'; // getting data from other file
-import 'customers.dart';
-import 'fragrance.dart';
+import 'customers.dart'; // getting data from other file
+import 'fragrance.dart'; // getting data from other file
 /* 
 Assumptions:
 -Username is case sensitive
@@ -14,7 +14,7 @@ Assumptions:
 
 // GLoabal variables
 var userInput;
-
+var loggedInCustomer = "No one is Login currently";
 
 void main() {
   //Starting the Program---Welcome Message
@@ -83,7 +83,6 @@ void registerUser() {
   stdout.write("Enter Name: ");
   var customerName = stdin.readLineSync()!;
 
-
   // getting customer E-mail
   stdout.write("Enter Email: ");
   var customerEmail = stdin.readLineSync()!;
@@ -125,34 +124,97 @@ void userLogin() {
   var customerPassword = stdin.readLineSync();
 
   bool iscredentials = false;
-  var customerName;
+  print(loggedInCustomer);
   for (var i in customers) {
     if (i['email'] == customeremail.toLowerCase() &&
         i['password'] == customerPassword) {
-          iscredentials = true;
-          customerName = i['name'];
-          break;
-        }
+      iscredentials = true;
+      loggedInCustomer = i['name'];
+      break;
+    }
   }
-  if(iscredentials == true){
-      print("\u001b[1m\u001b[32mLogin Successful ($customerName)\u001b[0m");
+  if (iscredentials == true) {
+    print("\u001b[1m\u001b[32mLogin Successful ($loggedInCustomer)\u001b[0m");
+    askShowProducts();
+  } else {
+    print("\u001b[31mSorry: Incorrect Credentials, Login Failed\u001b[0m");
+
+    // again asking user to select options
+    askUser();
+  }
+}
+
+askShowProducts() {
+  print("\u001b[36mEnter (1,2,3): ");
+  print("1: Show all products");
+  print("2: Show Bags");
+  print("3: Show Fragrance");
+  print("4: Show Jewelry");
+  print("5 (or any key): Logout \u001b[0m");
+
+  stdout.write("Enter: ");
+  var userInp = stdin.readLineSync()!;
+
+  showProducts(userInp);
+}
+
+showProducts(String userInp){
+  if(userInp == "1"){
+    showAll();
+  }
+  else if(userInp == '2'){
+    showBags();
+  }
+    else if(userInp == '3'){
+    showFragrance();
+  }
+    else if(userInp == '4'){
+    showJewelry();
   }
   else{
-      print("\u001b[31mSorry: Incorrect Credentials, Login Failed\u001b[0m");
-
-      // again asking user to select options
-      askUser();
+    logout();
   }
+}
+
+void showBags(){
+
+}
+
+void showFragrance(){
+
+}
+
+void showJewelry(){
+
+}
+
+
+void showAll(){
+
+}
+
+
+
+
+
+void logout(){
+  print("\u001b[1m\u001b[32mSuccessfully Logout From ($loggedInCustomer)\u001b[0m");
+
+  //setting logincustomer to no-one
+  loggedInCustomer = "No one is currently login";
+
+  // asking for again login
+  askUser();
 }
 
 String toSentenceCase(String input) {
   if (input.isEmpty) {
     return input;
   }
-  
+
   String firstLetter = input.substring(0, 1).toUpperCase();
   String restOfString = input.substring(1).toLowerCase();
-  
+
   return '$firstLetter$restOfString';
 }
 
