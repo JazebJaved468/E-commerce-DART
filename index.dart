@@ -1,7 +1,19 @@
 import 'dart:io';
+import 'bags.dart'; // getting data from other file
+import 'customers.dart';
+/* 
+Assumptions:
+-Username is case sensitive
+-Only 2 admins are there, no more admins allowed
+-Admin credentials: username, password
+-Customer credentials: email, password
+-email is case sensitive
+
+*/
 
 // GLoabal variables
 var userInput;
+
 
 void main() {
   //Starting the Program---Welcome Message
@@ -9,12 +21,10 @@ void main() {
 
   // asking user to login as
   askUser();
-
-  
 }
 
 void start() {
-  print('\u001b[1m\u001b[32m ======== Welcome to E-SHOP ========\u001b[0m');
+  print('\u001b[1m\u001b[32m======== Welcome to E-SHOP ========\u001b[0m');
 }
 
 void askUser() {
@@ -40,11 +50,13 @@ void doOperations(user) {
   } else if (user == '3') {
     userLogin();
   } else {
-    print("Program Exited");
+    print("\u001b[1m\u001b[32m======== E-Shop Closed ========\u001b[0m");
+    exit(
+        0); // program exited using builtin function, wese bhi exit hojata is k begair bhi
   }
 }
 
-adminLogin() {
+void adminLogin() {
   // getting admin username
   stdout.write("Enter Username: ");
   var adminName = stdin.readLineSync()!;
@@ -53,11 +65,11 @@ adminLogin() {
   stdout.write("Enter Password: ");
   var adminPassword = stdin.readLineSync();
 
-  // Assumption: Username is case sensitive (that's why used toLOwerCase())
-  if((adminName.toLowerCase() == "jazeb" && adminPassword == "jazeb") || (adminName.toLowerCase() == "arbaz" && adminPassword == "arbaz")){
+  // Username is case sensitive (that's why used toLOwerCase())
+  if ((adminName.toLowerCase() == "jazeb" && adminPassword == "jazeb") ||
+      (adminName.toLowerCase() == "arbaz" && adminPassword == "arbaz")) {
     print("\u001b[1m\u001b[32mWelcome to Admin Panel\u001b[0m");
-  }
-  else{
+  } else {
     print("\u001b[31mSorry: Incorrect Credentials\u001b[0m");
 
     // again asking user to select options
@@ -65,10 +77,70 @@ adminLogin() {
   }
 }
 
-registerUser() {}
+void registerUser() {
+  // getting customer Name
+  stdout.write("Enter Name: ");
+  var customerName = stdin.readLineSync()!;
 
-userLogin() {}
+  // getting customer E-mail
+  stdout.write("Enter Email: ");
+  var customerEmail = stdin.readLineSync()!;
 
+  // getting customer Contact
+  stdout.write("Enter Contact Number: ");
+  var customerContact = stdin.readLineSync()!;
+
+  // getting customer Address
+  stdout.write("Enter Address: ");
+  var customerAddress = stdin.readLineSync()!;
+
+  // getting customer password
+  stdout.write("Create Password: ");
+  var customerPassword = stdin.readLineSync();
+
+  // adding customer map to customers list
+  customers.add({
+    'name': customerName,
+    'email': customerEmail,
+    'contact': customerContact,
+    'address': customerAddress,
+    'password': customerPassword
+  });
+
+  print("\u001b[1m\u001b[32m You are successfully registered\u001b[0m");
+  // asking user for login
+  askUser();
+}
+
+void userLogin() {
+  // getting customer email
+  stdout.write("Enter email: ");
+  var customeremail = stdin.readLineSync()!;
+
+  // getting customer password
+  stdout.write("Enter Password: ");
+  var customerPassword = stdin.readLineSync();
+
+  bool iscredentials = false;
+  var customerName;
+  for (var i in customers) {
+    if (i['email'] == customeremail.toLowerCase() &&
+        i['password'] == customerPassword) {
+          iscredentials = true;
+          customerName = i['name'];
+          break;
+        }
+  }
+  if(iscredentials == true){
+      print("\u001b[1m\u001b[32mLogin Successful ($customerName)\u001b[0m");
+  }
+  else{
+      print("\u001b[31mSorry: Incorrect Credentials, Login Failed\u001b[0m");
+
+      // again asking user to select options
+      askUser();
+  }
+}
 
 // \u001b[1m: Sets the text style to bold.
 // \u001b[32m: Sets the text color to green.
