@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'bags.dart'; // getting data from other file
 import 'customers.dart';
+import 'fragrance.dart';
 /* 
 Assumptions:
 -Username is case sensitive
