@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'bags.dart'; // getting data from other file
 import 'customers.dart'; // getting data from other file
-import 'fragrance.dart'; // getting data from other file
+import 'fragrance.dart';
+import 'jewelry.dart'; // getting data from other file
 /* 
 Assumptions:
 -Username is case sensitive
@@ -124,7 +125,6 @@ void userLogin() {
   var customerPassword = stdin.readLineSync();
 
   bool iscredentials = false;
-  print(loggedInCustomer);
   for (var i in customers) {
     if (i['email'] == customeremail.toLowerCase() &&
         i['password'] == customerPassword) {
@@ -163,41 +163,50 @@ showProducts(String userInp){
     showAll();
   }
   else if(userInp == '2'){
-    showBags();
+    showProductList('BAGS', bags);
   }
     else if(userInp == '3'){
-    showFragrance();
+    showProductList('FRAGRANCES', fragrance);
   }
     else if(userInp == '4'){
-    showJewelry();
+    showProductList('JEWELRY', jewelry);
   }
   else{
-    logout();
+    logoutCustomer();
   }
 }
 
-void showBags(){
-
+void showProductList(String productTitle, List productList, {int counter=1} ){
+  // var productTitle = "BAGS";
+  // var productList = bags;
+  print("\u001b[1m\u001b[35m$productTitle\u001b[0m");
+  for (var i = 0; i < productList.length; i++) {
+    print("${counter} : ${productList[i]['name']}");
+    counter++;
+  }
 }
-
-void showFragrance(){
-
-}
-
-void showJewelry(){
-
-}
-
 
 void showAll(){
-
+  List<String> titles = ['BAGS', 'FRAGRANCES', 'JEWELRY'];
+  List<List> productLists = [bags, fragrance, jewelry];
+  for (var i = 0; i < 3; i++) {
+    if(i == 1 ){
+        showProductList(titles[i], productLists[i], counter: bags.length + 1);  
+    }
+    else if(i == 2 ){
+        showProductList(titles[i], productLists[i], counter: bags.length +1 + fragrance.length);  
+    }
+    else{
+    showProductList(titles[i], productLists[i]);    
+  }
+  }
 }
 
 
 
 
 
-void logout(){
+void logoutCustomer(){
   print("\u001b[1m\u001b[32mSuccessfully Logout From ($loggedInCustomer)\u001b[0m");
 
   //setting logincustomer to no-one

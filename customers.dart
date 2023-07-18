@@ -9,9 +9,9 @@ List<Map<String, dynamic>> customers = [
   },
   {
     'name': "Ali",
-    'email': "ali48",
+    'email': "a",
     'contact': "0345",
     'address': "flat 200",
-    'password': "ali343"
+    'password': "a"
   }
 ];
