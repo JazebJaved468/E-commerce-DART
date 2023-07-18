@@ -102,6 +102,7 @@ void registerUser() {
 
   // adding customer map to customers list
   customers.add({
+    // converting username to sentence case
     'name': toSentenceCase(customerName),
     'email': customerEmail,
     'contact': customerContact,
