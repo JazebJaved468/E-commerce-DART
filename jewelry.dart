@@ -1,5 +1,5 @@
 List<Map<String, dynamic>> jewelry = [
-  {
+  {'id' : 'j1',
     'name': 'Diamond Pendant',
     'price': 500,
     'style': 'Classic',
@@ -8,7 +8,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Polished',
     'brand': 'ABC Jewelers',
   },
-  {
+  {'id' : 'j2',
     'name': 'Silver Hoop Earrings',
     'price': 50,
     'style': 'Minimalist',
@@ -17,7 +17,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Matte',
     'brand': 'XYZ Accessories',
   },
-  {
+  {'id' : 'j3',
     'name': 'Pearl Necklace',
     'price': 350,
     'style': 'Elegant',
@@ -26,7 +26,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Glossy',
     'brand': 'PQR Jewelers',
   },
-  {
+  {'id' : 'j4',
     'name': 'Rose Gold Bracelet',
     'price': 180,
     'style': 'Trendy',
@@ -35,7 +35,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Polished',
     'brand': 'LMN Accessories',
   },
-  {
+  {'id' : 'j5',
     'name': 'Sapphire Ring',
     'price': 650,
     'style': 'Statement',
@@ -44,7 +44,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Sparkling',
     'brand': 'RST Gems',
   },
-  {
+  {'id' : 'j6',
     'name': 'Silver Charm Bracelet',
     'price': 90,
     'style': 'Charming',
@@ -53,7 +53,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Textured',
     'brand': 'UVW Jewels',
   },
-  {
+  {'id' : 'j7',
     'name': 'Diamond Stud Earrings',
     'price': 800,
     'style': 'Classic',
@@ -62,7 +62,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Polished',
     'brand': 'XYZ Jewelers',
   },
-  {
+  {'id' : 'j8',
     'name': 'Emerald Pendant',
     'price': 550,
     'style': 'Luxurious',
@@ -71,7 +71,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Polished',
     'brand': 'ABC Jewels',
   },
-  {
+  {'id' : 'j9',
     'name': 'Diamond Tennis Bracelet',
     'price': 1200,
     'style': 'Elegant',
@@ -80,7 +80,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Shiny',
     'brand': 'XYZ Luxury',
   },
-  {
+  {'id' : 'j10',
     'name': 'Ruby Stud Earrings',
     'price': 450,
     'style': 'Timeless',
@@ -89,7 +89,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Polished',
     'brand': 'PQR Gems',
   },
-  {
+  {'id' : 'j11',
     'name': 'Silver Cuff Bangle',
     'price': 150,
     'style': 'Modern',
@@ -98,7 +98,7 @@ List<Map<String, dynamic>> jewelry = [
     'finish': 'Brushed',
     'brand': 'LMN Jewelry',
   },
-  {
+  {'id' : 'j12',
     'name': 'Amethyst Cocktail Ring',
     'price': 380,
     'style': 'Statement',

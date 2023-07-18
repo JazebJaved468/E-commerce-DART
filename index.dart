@@ -181,7 +181,7 @@ void showProductList(String productTitle, List productList, {int counter=1} ){
   // var productList = bags;
   print("\u001b[1m\u001b[35m$productTitle\u001b[0m");
   for (var i = 0; i < productList.length; i++) {
-    print("${counter} : ${productList[i]['name']}");
+    print("${productList[i]['id']} : ${productList[i]['name']}");
     counter++;
   }
 }

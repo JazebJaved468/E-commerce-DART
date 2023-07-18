@@ -1,5 +1,5 @@
 List<Map<String, dynamic>> bags = [
-    {
+    {'id' : 'b1',
       'name': 'Tote Bag',
       'price': 50,
       'color': 'Black',
@@ -8,7 +8,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Classic',
       'brand': 'ABC Company',
     },
-    {
+    {'id' : 'b2',
       'name': 'Shoulder Bag',
       'price': 65,
       'color': 'Brown',
@@ -17,7 +17,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Casual',
       'brand': 'XYZ Brand',
     },
-    {
+    {'id' : 'b3',
       'name': 'Crossbody Bag',
       'price': 40,
       'color': 'Red',
@@ -26,7 +26,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Sporty',
       'brand': 'DEF Accessories',
     },
-    {
+    {'id' : 'b4',
       'name': 'Clutch',
       'price': 80,
       'color': 'Silver',
@@ -35,7 +35,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Elegant',
       'brand': 'GHI Fashion',
     },
-    {
+    {'id' : 'b5',
       'name': 'Backpack',
       'price': 55,
       'color': 'Blue',
@@ -44,7 +44,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Urban',
       'brand': 'JKL Outdoors',
     },
-        {
+        {'id' : 'b6',
       'name': 'Satchel',
       'price': 75,
       'color': 'Beige',
@@ -53,7 +53,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Sophisticated',
       'brand': 'MNO Collection',
     },
-    {
+    {'id' : 'b7',
       'name': 'Bucket Bag',
       'price': 60,
       'color': 'Pink',
@@ -62,7 +62,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Bohemian',
       'brand': 'PQR Accessories',
     },
-    {
+    {'id' : 'b8',
       'name': 'Wristlet',
       'price': 35,
       'color': 'Gold',
@@ -71,7 +71,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Chic',
       'brand': 'STU Fashion',
     },
-    {
+    {'id' : 'b9',
       'name': 'Tote Backpack',
       'price': 90,
       'color': 'Gray',
@@ -80,7 +80,7 @@ List<Map<String, dynamic>> bags = [
       'design': 'Versatile',
       'brand': 'VWX Outdoors',
     },
-    {
+    {'id' : 'b10',
       'name': 'Evening Clutch',
       'price': 55,
       'color': 'Black',
