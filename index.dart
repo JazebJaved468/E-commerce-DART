@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'bags.dart'; // getting data from other file
 import 'customers.dart'; // getting data from other file
 import 'fragrance.dart';
@@ -16,10 +17,15 @@ Assumptions:
 // GLoabal variables
 var userInput;
 var loggedInCustomer = "No one is Login currently";
+dynamic loggedInCustomerPosition = 0;
+    // "None"; // dynamic bcz in middle of program its datatype is changing from string to int
 
 void main() {
   //Starting the Program---Welcome Message
   start();
+
+  // asking option from user after after show products
+  askOptions();
 }
 
 void start() {
@@ -131,6 +137,8 @@ void userLogin() {
         i['password'] == customerPassword) {
       iscredentials = true;
       loggedInCustomer = i['name'];
+      loggedInCustomerPosition = customers.indexOf(
+          i); // storing in global variable so that products can be easily added to cart
       break;
     }
   }
@@ -180,7 +188,8 @@ void showProductList(String productTitle, List productList) {
   }
 
   // asking user to select options like itemdetails, cart etc
-  askOptions();
+  // askOptions();
+  // above line commented bcz showall func getting stuck in recursion
 }
 
 void showAll() {
@@ -197,29 +206,67 @@ void askOptions() {
   print("2: Add to cart ");
   print("3: Remove from Cart");
   print("4: Show Cart");
-  print("5 (or any key): Logout \u001b[0m");
+  print("5: Go Back");
+  print("6 (or any key): Logout \u001b[0m");
 
   stdout.write("Enter: ");
   var optionSelected = stdin.readLineSync()!;
 
   if (optionSelected == "1") {
-    stdout.write("Enter Product ID: ");
-    var productId = stdin.readLineSync()!;
-    var prodId = productId.toLowerCase();
-    if (prodId[0].toLowerCase() == "b") {
-      showItemDetails(prodId, bags, "Bag");
-    } else if (prodId[0] == "f") {
-      showItemDetails(prodId, fragrance, "Fragrance");
-    } else if (prodId[0] == "j") {
-      showItemDetails(prodId, jewelry, "Jewelry");
-    } else {
-      print(
-          "\u001b[1m\u001b[31mSorry, Product not found. Write correct ID\u001b[0m");
-    }
+    getProductID();
+  } else if (optionSelected == "2") {
+    addToCart();
+  } else if (optionSelected == "3") {
+    removeFromCart();
+  } else if (optionSelected == "4") {
+    showCart();
+  } else if (optionSelected == "5") {
+    askShowProducts();
+  } else {
+    logoutCustomer();
   }
-
   // Again asking options
   askOptions();
+}
+
+getProductID() {
+  stdout.write("Enter Product ID: ");
+  var productId = stdin.readLineSync()!;
+  var prodId = productId.toLowerCase();
+  if (prodId[0].toLowerCase() == "b") {
+    showItemDetails(prodId, bags, "Bag");
+  } else if (prodId[0] == "f") {
+    showItemDetails(prodId, fragrance, "Fragrance");
+  } else if (prodId[0] == "j") {
+    showItemDetails(prodId, jewelry, "Jewelry");
+  } else {
+    print(
+        "\u001b[1m\u001b[31mSorry, Product not found... Write correct ID\u001b[0m");
+  }
+}
+
+addToCart() {
+    var accessedCart = customers[loggedInCustomerPosition]['cart'];
+  stdout.write("Enter Product ID to be added to cart: ");
+  var productId = stdin.readLineSync()!;
+  var prodId = productId.toLowerCase();
+
+  accessedCart.add(prodId);
+  print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
+}
+
+removeFromCart(){
+
+}
+
+showCart(){
+  var accessedCart = customers[loggedInCustomerPosition]['cart'];
+  stdout.write("\u001b[1m\u001b[35mYour Cart Contains the following products ---> \u001b[0m");
+  // ${customers[loggedInCustomerPosition]['cart']}");
+  for (var cartItem in customers[loggedInCustomerPosition]['cart']) {
+    stdout.write('$cartItem | ');
+  }
+  print(" ");
 }
 
 void showItemDetails(String id, List productList, String categoryName) {
