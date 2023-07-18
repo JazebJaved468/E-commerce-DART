@@ -10,15 +10,7 @@ void main() {
   // asking user to login as
   askUser();
 
-  // Doing operations depending on user
-  // doOperations(user);
-
-  // if (user == "1"){
-  //     stdout.write("Enter Username: ");
-  //     var adminName = stdin.readLineSync();
-  //     stdout.write("Enter Password: ");
-  //     var adminPassword = stdin.readLineSync();
-  // }
+  
 }
 
 void start() {
