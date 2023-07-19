@@ -17,16 +17,15 @@ Assumptions:
 // GLoabal variables
 var userInput;
 var loggedInCustomer = "No one is Login currently";
-dynamic loggedInCustomerPosition = "None";
+dynamic loggedInCustomerPosition = 0;
 // "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
 void main() {
   //Starting the Program---Welcome Message
-  start();
+  // start();
 
   // asking option from user after after show products
-  // askOptions();
-
+  askOptions();
 }
 
 void start() {
@@ -207,8 +206,9 @@ void askOptions() {
   print("2: Add to cart ");
   print("3: Remove from Cart");
   print("4: Show Cart");
-  print("5: Go Back");
-  print("6 (or any key): Logout \u001b[0m");
+  print("5: Check Out");
+  print("6: Go Back");
+  print("7 (or any other key): Logout \u001b[0m");
 
   stdout.write("Enter: ");
   var optionSelected = stdin.readLineSync()!;
@@ -222,6 +222,8 @@ void askOptions() {
   } else if (optionSelected == "4") {
     showCart();
   } else if (optionSelected == "5") {
+    checkOut();
+  }else if (optionSelected == "6") {
     askShowProducts();
   } else {
     logoutCustomer();
@@ -277,11 +279,42 @@ showCart() {
         "\u001b[1m\u001b[35mYour Cart contains the following products ---> \u001b[0m");
     // ${customers[loggedInCustomerPosition]['cart']}");
 
-    for (var cartItem in customers[loggedInCustomerPosition]['cart']) {
-      stdout.write('$cartItem | ');
+    for (var cartItem in accessedCart) {
+      // print(cartItem);
+      stdout.write(
+          '${getItemName(cartItem['item'])} (${cartItem['quantity']}) | ');
+      // stdout.write(cartItem['item'] );
     }
     print(" ");
   }
+}
+
+String getItemName(String prodId) {
+  if (prodId[0].toLowerCase() == "b") {
+    return (getName(prodId, bags));
+  } else if (prodId[0] == "f") {
+    return (getName(prodId, fragrance));
+  } else {
+    return (getName(prodId, jewelry));
+  }
+}
+
+String getName(String id, List productList) {
+  bool isFound = false;
+  var requiredName;
+  for (var i = 0; i < productList.length; i++) {
+    if (isFound == false) {
+      if (id == productList[i]['id']) {
+        isFound = true;
+        // return (productList[i]['name']);
+        requiredName = productList[i]['name'];
+      }
+    }
+    else{
+        break;
+      }
+  }
+  return requiredName;
 }
 
 void showItemDetails(String id, List productList, String categoryName) {

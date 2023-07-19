@@ -6,7 +6,11 @@ List<Map<String, dynamic>> customers = [
     'contact': "0307",
     'address': "flat 400",
     'password': "r",
-    'cart': ["b9","f4","j5"]
+    'cart': [
+      {'item': "b9", 'quantity': 3},
+      {'item': "f3", 'quantity': 1},
+      {'item': "j5", 'quantity': 2}
+    ]
   },
   {
     'name': "Ali",
