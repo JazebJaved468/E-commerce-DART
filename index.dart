@@ -17,15 +17,16 @@ Assumptions:
 // GLoabal variables
 var userInput;
 var loggedInCustomer = "No one is Login currently";
-dynamic loggedInCustomerPosition = 0;
-    // "None"; // dynamic bcz in middle of program its datatype is changing from string to int
+dynamic loggedInCustomerPosition = "None";
+// "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
 void main() {
   //Starting the Program---Welcome Message
   start();
 
   // asking option from user after after show products
-  askOptions();
+  // askOptions();
+
 }
 
 void start() {
@@ -246,27 +247,41 @@ getProductID() {
 }
 
 addToCart() {
-    var accessedCart = customers[loggedInCustomerPosition]['cart'];
+  var accessedCart = customers[loggedInCustomerPosition]['cart'];
   stdout.write("Enter Product ID to be added to cart: ");
   var productId = stdin.readLineSync()!;
   var prodId = productId.toLowerCase();
 
   accessedCart.add(prodId);
   print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
+  showCart();
 }
 
-removeFromCart(){
-
-}
-
-showCart(){
+removeFromCart() {
   var accessedCart = customers[loggedInCustomerPosition]['cart'];
-  stdout.write("\u001b[1m\u001b[35mYour Cart Contains the following products ---> \u001b[0m");
-  // ${customers[loggedInCustomerPosition]['cart']}");
-  for (var cartItem in customers[loggedInCustomerPosition]['cart']) {
-    stdout.write('$cartItem | ');
+  stdout.write("Enter Product ID to be removed from cart: ");
+  var productId = stdin.readLineSync()!;
+  var prodId = productId.toLowerCase();
+
+  accessedCart.removeWhere((item) => item == prodId);
+  print("\u001b[1m\u001b[35mItem Successfully Removed From Cart...\u001b[0m");
+  showCart();
+}
+
+showCart() {
+  var accessedCart = customers[loggedInCustomerPosition]['cart'];
+  if (accessedCart.length == 0) {
+    print("\u001b[1m\u001b[35mYour Cart is currently empty\u001b[0m");
+  } else {
+    stdout.write(
+        "\u001b[1m\u001b[35mYour Cart contains the following products ---> \u001b[0m");
+    // ${customers[loggedInCustomerPosition]['cart']}");
+
+    for (var cartItem in customers[loggedInCustomerPosition]['cart']) {
+      stdout.write('$cartItem | ');
+    }
+    print(" ");
   }
-  print(" ");
 }
 
 void showItemDetails(String id, List productList, String categoryName) {

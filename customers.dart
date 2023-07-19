@@ -6,7 +6,7 @@ List<Map<String, dynamic>> customers = [
     'contact': "0307",
     'address': "flat 400",
     'password': "r",
-    'cart': ["water","burger","burger"]
+    'cart': ["b9","f4","j5"]
   },
   {
     'name': "Ali",
@@ -14,6 +14,6 @@ List<Map<String, dynamic>> customers = [
     'contact': "0345",
     'address': "flat 200",
     'password': "a",
-    'cart': ["burger"]
+    'cart': ["f3"]
   }
 ];
