@@ -16,7 +16,8 @@ Assumptions:
 
 // GLoabal variables
 var userInput;
-var loggedInCustomer = "No one is Login currently";
+dynamic loggedInCustomer = customers[
+    0]; // dynamic bcz in middle of program its datatype is changing from string to Map and then again to String
 dynamic loggedInCustomerPosition = 0;
 // "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
@@ -25,7 +26,10 @@ void main() {
   // start();
 
   // asking option from user after after show products
-  askOptions();
+  // askOptions();
+
+  //extra
+  orderOptions();
 }
 
 void start() {
@@ -136,14 +140,15 @@ void userLogin() {
     if (i['email'] == customeremail.toLowerCase() &&
         i['password'] == customerPassword) {
       iscredentials = true;
-      loggedInCustomer = i['name'];
+      loggedInCustomer = i;
       loggedInCustomerPosition = customers.indexOf(
           i); // storing in global variable so that products can be easily added to cart
       break;
     }
   }
   if (iscredentials == true) {
-    print("\u001b[1m\u001b[32mLogin Successful ($loggedInCustomer)\u001b[0m");
+    print(
+        "\u001b[1m\u001b[32mLogin Successful (${loggedInCustomer['name']})\u001b[0m");
     askShowProducts();
   } else {
     print("\u001b[31mSorry: Incorrect Credentials, Login Failed\u001b[0m");
@@ -154,6 +159,8 @@ void userLogin() {
 }
 
 askShowProducts() {
+  //Home page
+
   print("\u001b[36mEnter (1,2,3): ");
   print("1: Show all products");
   print("2: Show Bags");
@@ -223,7 +230,7 @@ void askOptions() {
     showCart();
   } else if (optionSelected == "5") {
     checkOut();
-  }else if (optionSelected == "6") {
+  } else if (optionSelected == "6") {
     askShowProducts();
   } else {
     logoutCustomer();
@@ -309,12 +316,94 @@ String getName(String id, List productList) {
         // return (productList[i]['name']);
         requiredName = productList[i]['name'];
       }
+    } else {
+      break;
     }
-    else{
-        break;
-      }
   }
   return requiredName;
+}
+
+checkOut() {
+  print("\u001b[1m\u001b[32mEnter Shipping Details\u001b[0m");
+
+  // getting country
+  stdout.write("Enter Country: ");
+  var country = stdin.readLineSync()!;
+
+  // getting city
+  stdout.write("Enter City: ");
+  var city = stdin.readLineSync()!;
+
+  // getting Shipping Addres
+  stdout.write("Enter Shipping Address: ");
+  var shippingAddress = stdin.readLineSync()!;
+
+  // getting postal code
+  stdout.write("Enter Postal Code: ");
+  var postalCode = stdin.readLineSync()!;
+
+  // adding customer map to customers list
+  print('loggedInCustomer datatype : ${loggedInCustomer.runtimeType}');
+  loggedInCustomer['shippingDetails'] = {
+    'city': city,
+    'country': country,
+    'shippingAddress': shippingAddress,
+    'postalCode': postalCode,
+  };
+
+  print("\u001b[1m\u001b[32mShipping Details Saved\u001b[0m");
+    print('\u001b[30mNote: Shipping Charges will be applied...\u001b[0m');
+
+  orderOptions();
+}
+
+orderOptions() {
+  print("\u001b[36mEnter (1,2,3): ");
+  print("1: Generate Invoice");
+  print("2: Place Order");
+  print("3: Go Back to Cart Page");
+
+  print("4 (or any key): Logout \u001b[0m");
+
+  stdout.write("Enter: ");
+  var orderOpt = stdin.readLineSync()!;
+
+  if (orderOpt == "1") {
+    generateInvoice();
+  } else if (orderOpt == "2") {
+    placeOrder();
+    askAfterPlaceOrder();
+  } else if (orderOpt == "3") {
+    askOptions();
+  } else {
+    logoutCustomer();
+  }
+}
+
+generateInvoice() {
+
+}
+
+placeOrder() {
+  print('\u001b[32mORDER PLACED SUCCESSFULLY\u001b[0m');
+  print('\u001b[30mNote: Order will be delivered in 10 days.\u001b[0m');
+  print(
+      '\u001b[1m\u001b[35mThanks For E-Shopping, Wishing You A Happy Day!\u001b[0m');
+}
+
+askAfterPlaceOrder() {
+  print("\u001b[36mEnter (1,2,3): ");
+  print("1: Go To Home Page");
+  print("2 (or any key): Logout\u001b[0m");
+
+  stdout.write("Enter: ");
+  var afterOrder = stdin.readLineSync()!;
+
+  if (afterOrder == "1") {
+    askShowProducts();
+  } else {
+    logoutCustomer();
+  }
 }
 
 void showItemDetails(String id, List productList, String categoryName) {
@@ -347,7 +436,7 @@ void showItemDetails(String id, List productList, String categoryName) {
 
 void logoutCustomer() {
   print(
-      "\u001b[1m\u001b[32mSuccessfully Logout From ($loggedInCustomer)\u001b[0m");
+      "\u001b[1m\u001b[32mSuccessfully Logout From (${loggedInCustomer['name']})\u001b[0m");
 
   //setting logincustomer to no-one
   loggedInCustomer = "No one is currently login";
