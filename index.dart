@@ -29,7 +29,7 @@ void main() {
   // askOptions();
 
   //extra
-  orderOptions();
+  generateInvoice();
 }
 
 void start() {
@@ -343,7 +343,7 @@ checkOut() {
   var postalCode = stdin.readLineSync()!;
 
   // adding customer map to customers list
-  print('loggedInCustomer datatype : ${loggedInCustomer.runtimeType}');
+  // print('loggedInCustomer datatype : ${loggedInCustomer.runtimeType}');
   loggedInCustomer['shippingDetails'] = {
     'city': city,
     'country': country,
@@ -352,7 +352,7 @@ checkOut() {
   };
 
   print("\u001b[1m\u001b[32mShipping Details Saved\u001b[0m");
-    print('\u001b[30mNote: Shipping Charges will be applied...\u001b[0m');
+  print('\u001b[30mNote: Shipping Charges will be applied...\u001b[0m');
 
   orderOptions();
 }
@@ -381,6 +381,22 @@ orderOptions() {
 }
 
 generateInvoice() {
+  print('\u001b[1m\u001b[33m========= ORDER INVOICE =========\u001b[0m');
+  print(loggedInCustomer);
+  print('\u001b[32mCUSTOMER INFORMATION\u001b[0m');
+    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
+  print('\u001b[32mCUSTOMER NAME\u001b[0m =============== \u001b[37m${loggedInCustomer['name']}\u001b[0m');
+  print('\u001b[32mCUSTOMER E-MAIL\u001b[0m =============== \u001b[37m${loggedInCustomer['email']}\u001b[0m');
+  print('\u001b[32mCUSTOMER CONTACT\u001b[0m =============== \u001b[37m${loggedInCustomer['contact']}\u001b[0m');
+  print(" ");
+  print('\u001b[32mCUSTOMER SHIPPING DETAILS\u001b[0m');
+    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
+      print('\u001b[32mCOUNTRY\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['country']}\u001b[0m');
+  print('\u001b[32mCITY\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['city']}\u001b[0m');
+  print('\u001b[32mSHIPPING ADDRESS\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['shippingAddress']}\u001b[0m');
+    print(" ");
+    print('\u001b[32mITEMS PURACHASED\u001b[0m');
+    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
 
 }
 

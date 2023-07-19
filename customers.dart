@@ -10,7 +10,13 @@ List<Map<String, dynamic>> customers = [
       {'item': "b9", 'quantity': 3},
       {'item': "f3", 'quantity': 1},
       {'item': "j5", 'quantity': 2}
-    ]
+    ],
+    'shippingDetails': {
+    'country': "Pakistan",
+      'city': "Karachi",
+    'shippingAddress': "Flat 123, ABC Building",
+    'postalCode': "67654",
+    }
   },
   {
     'name': "Ali",
