@@ -392,8 +392,7 @@ orderOptions() {
 
 generateInvoice() {
   var space = "                ";
-  print('\u001b[1m\u001b[33m========= ORDER INVOICE =========\u001b[0m');
-  print(loggedInCustomer);
+  print('\u001b[1m\u001b[33m================================ ORDER INVOICE ================================\u001b[0m');
   print('\u001b[35m\x1B[4mCUSTOMER INFORMATION\u001b[0m');
   print('\u001b[32mCUSTOMER NAME\u001b[0m =============== \u001b[37m${loggedInCustomer['name']}\u001b[0m');
   print('\u001b[32mCUSTOMER E-MAIL\u001b[0m =============== \u001b[37m${loggedInCustomer['email']}\u001b[0m');
@@ -407,14 +406,25 @@ generateInvoice() {
     print(" ");
     print('\u001b[35m\x1B[4mITEMS PURACHASED\u001b[0m');
     print('\u001b[32m ITEM ID =============== ITEM NAME =============== QUANTITY=============== PRICE\u001b[0m');
+    num total = 0;
+    num shippingCharges = 400;
     for (var item in loggedInCustomer['cart']) {
       var itemId = item['item'];
       var itemName = getItemName(item['item'], "name");
       var itemQuantity = item['quantity'];
       var itemPrice = getItemName(item['item'], "price");
-          print('\u001b[37m   ${itemId} $space ${itemName} $space ${itemQuantity} $space ${itemPrice}\u001b[0m');
+      total += itemPrice;
+          print('\u001b[37m   ${itemId} $space ${itemName} $space ${itemQuantity} $space   ${itemPrice}\u001b[0m');
     }
-
+     print("");
+      print('\u001b[37mTOTAL --------------------------------------------------------------------- $total\u001b[0m');
+      print(" $space SHIPPING CHARGES ---------------------------------------- $shippingCharges");
+          num gst = (total*0.18).ceil();
+      print(" $space GST ----------------------------------------------------- $gst");
+        num subTotal = total + shippingCharges + gst;
+      print("");
+        print('\u001b[1m\u001b[32m SUBTOTAL $space$space$space$space $subTotal\u001b[0m');
+          print('\u001b[1m\u001b[33m============================= Thanks For Shopping =============================\u001b[0m');
 }
 
 placeOrder() {
