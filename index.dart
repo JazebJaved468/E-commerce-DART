@@ -21,15 +21,22 @@ dynamic loggedInCustomer = customers[
 dynamic loggedInCustomerPosition = 0;
 // "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
+bool isAdmin = false;
+bool isCustomer = false;
 void main() {
   //Starting the Program---Welcome Message
-  // start();
+  start();
 
   // asking option from user after after show products
-  // askOptions();
+  if(isCustomer){
+    askOptions();
+  }
+  else{
+    askAdminOptions();
+  }
+
 
   //extra
-  generateInvoice();
 }
 
 void start() {
@@ -140,6 +147,7 @@ void userLogin() {
     if (i['email'] == customeremail.toLowerCase() &&
         i['password'] == customerPassword) {
       iscredentials = true;
+      isCustomer = true;
       loggedInCustomer = i;
       loggedInCustomerPosition = customers.indexOf(
           i); // storing in global variable so that products can be easily added to cart
@@ -161,12 +169,12 @@ void userLogin() {
 askShowProducts() {
   //Home page
 
-  print("\u001b[36mEnter (1,2,3): ");
+  print("\u001b[36mEnter (1,2,3,4,5): ");
   print("1: Show all products");
   print("2: Show Bags");
   print("3: Show Fragrance");
   print("4: Show Jewelry");
-  print("5 (or any key): Logout \u001b[0m");
+  print("5 (or any other key): Logout \u001b[0m");
 
   stdout.write("Enter: ");
   var userInp = stdin.readLineSync()!;
@@ -208,7 +216,7 @@ void showAll() {
 }
 
 void askOptions() {
-  print("\u001b[36mEnter (1,2,3,4): ");
+  print("\u001b[36mEnter (1,2,3,4,5,6,7): ");
   print("1: Show product details");
   print("2: Add to cart ");
   print("3: Remove from Cart");
@@ -261,7 +269,12 @@ addToCart() {
   var productId = stdin.readLineSync()!;
   var prodId = productId.toLowerCase();
 
-  accessedCart.add(prodId);
+  var cartLength = accessedCart.length;
+  accessedCart.add({'item' : prodId});
+
+  stdout.write("Enter Product Quantity: ");
+  var productquantity = stdin.readLineSync()!;
+  accessedCart[cartLength]['quantity'] = productquantity;
   print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
   showCart();
 }
@@ -439,6 +452,8 @@ generateInvoice() {
       '\u001b[1m\u001b[32m SUBTOTAL $space$space$space$space $subTotal\u001b[0m');
   print(
       '\u001b[1m\u001b[33m============================= Thanks For Shopping =============================\u001b[0m');
+
+  orderOptions();
 }
 
 placeOrder() {
@@ -451,7 +466,7 @@ placeOrder() {
 askAfterPlaceOrder() {
   print("\u001b[36mEnter (1,2,3): ");
   print("1: Go To Home Page");
-  print("2 (or any key): Logout\u001b[0m");
+  print("2 (or any other key): Logout\u001b[0m");
 
   stdout.write("Enter: ");
   var afterOrder = stdin.readLineSync()!;
@@ -497,6 +512,7 @@ void logoutCustomer() {
 
   //setting logincustomer to no-one
   loggedInCustomer = "No one is currently login";
+  isCustomer = false;
 
   // asking for again login
   askUser();
@@ -513,7 +529,9 @@ String toSentenceCase(String input) {
   return '$firstLetter$restOfString';
 }
 
-
+askAdminOptions(){
+  print("Hello Admin");
+}
 
 /* FORMATTING
 
