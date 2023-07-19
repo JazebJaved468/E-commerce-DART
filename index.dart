@@ -289,38 +289,48 @@ showCart() {
     for (var cartItem in accessedCart) {
       // print(cartItem);
       stdout.write(
-          '${getItemName(cartItem['item'])} (${cartItem['quantity']}) | ');
+          '${getItemName(cartItem['item'], "name")} (${cartItem['quantity']}) | ');
       // stdout.write(cartItem['item'] );
     }
     print(" ");
   }
 }
 
-String getItemName(String prodId) {
+dynamic getItemName(String prodId, String attribute) {
   if (prodId[0].toLowerCase() == "b") {
-    return (getName(prodId, bags));
+    return (getName(prodId, bags, attribute));
   } else if (prodId[0] == "f") {
-    return (getName(prodId, fragrance));
+    return (getName(prodId, fragrance, attribute));
   } else {
-    return (getName(prodId, jewelry));
+    return (getName(prodId, jewelry, attribute));
   }
 }
 
-String getName(String id, List productList) {
+dynamic getName(String id, List productList, String attribute) {
   bool isFound = false;
   var requiredName;
+  var requiredPrice;
   for (var i = 0; i < productList.length; i++) {
     if (isFound == false) {
       if (id == productList[i]['id']) {
         isFound = true;
         // return (productList[i]['name']);
         requiredName = productList[i]['name'];
+        requiredPrice = productList[i]['price'];
       }
     } else {
       break;
     }
   }
+  if(attribute == "name"){
   return requiredName;
+  }else if(attribute == "price"){
+    return requiredPrice;
+  }
+  else{
+    return "none";
+  }
+
 }
 
 checkOut() {
@@ -352,7 +362,7 @@ checkOut() {
   };
 
   print("\u001b[1m\u001b[32mShipping Details Saved\u001b[0m");
-  print('\u001b[30mNote: Shipping Charges will be applied...\u001b[0m');
+  print('\u001b[30m\x1B[3mNote: Shipping Charges will be applied...\u001b[0m');
 
   orderOptions();
 }
@@ -381,22 +391,29 @@ orderOptions() {
 }
 
 generateInvoice() {
+  var space = "                ";
   print('\u001b[1m\u001b[33m========= ORDER INVOICE =========\u001b[0m');
   print(loggedInCustomer);
-  print('\u001b[32mCUSTOMER INFORMATION\u001b[0m');
-    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
+  print('\u001b[35m\x1B[4mCUSTOMER INFORMATION\u001b[0m');
   print('\u001b[32mCUSTOMER NAME\u001b[0m =============== \u001b[37m${loggedInCustomer['name']}\u001b[0m');
   print('\u001b[32mCUSTOMER E-MAIL\u001b[0m =============== \u001b[37m${loggedInCustomer['email']}\u001b[0m');
   print('\u001b[32mCUSTOMER CONTACT\u001b[0m =============== \u001b[37m${loggedInCustomer['contact']}\u001b[0m');
   print(" ");
-  print('\u001b[32mCUSTOMER SHIPPING DETAILS\u001b[0m');
-    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
+  print('\u001b[35m\x1B[4mCUSTOMER SHIPPING DETAILS\u001b[0m');
       print('\u001b[32mCOUNTRY\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['country']}\u001b[0m');
   print('\u001b[32mCITY\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['city']}\u001b[0m');
   print('\u001b[32mSHIPPING ADDRESS\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['shippingAddress']}\u001b[0m');
+    print('\u001b[32mPOSTAL CODE\u001b[0m =============== \u001b[37m${loggedInCustomer['shippingDetails']['postalCode']}\u001b[0m');
     print(" ");
-    print('\u001b[32mITEMS PURACHASED\u001b[0m');
-    print('\u001b[30m----------------------------------------------------------------------------------\u001b[0m');
+    print('\u001b[35m\x1B[4mITEMS PURACHASED\u001b[0m');
+    print('\u001b[32m ITEM ID =============== ITEM NAME =============== QUANTITY=============== PRICE\u001b[0m');
+    for (var item in loggedInCustomer['cart']) {
+      var itemId = item['item'];
+      var itemName = getItemName(item['item'], "name");
+      var itemQuantity = item['quantity'];
+      var itemPrice = getItemName(item['item'], "price");
+          print('\u001b[37m   ${itemId} $space ${itemName} $space ${itemQuantity} $space ${itemPrice}\u001b[0m');
+    }
 
 }
 
@@ -478,6 +495,8 @@ String toSentenceCase(String input) {
 
 \u001b[1m: Sets the text style to bold.
 \u001b[0m: Resets the text style and color to the default.
+\x1B[4m: uderline
+\x1B[3m: italicized
 
 COLORS
 Black: \u001b[30m
