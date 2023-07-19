@@ -4,6 +4,7 @@ import 'bags.dart'; // getting data from other file
 import 'customers.dart'; // getting data from other file
 import 'fragrance.dart';
 import 'jewelry.dart'; // getting data from other file
+
 /* 
 Assumptions:
 -Username is case sensitive
@@ -11,7 +12,6 @@ Assumptions:
 -Admin credentials: username, password
 -Customer credentials: email, password
 -email is case sensitive
-
 */
 
 // GLoabal variables
@@ -23,6 +23,7 @@ dynamic loggedInCustomerPosition = 0;
 
 bool isAdmin = false;
 bool isCustomer = false;
+
 void main() {
   //Starting the Program---Welcome Message
   start();
@@ -35,8 +36,7 @@ void main() {
     askAdminOptions();
   }
 
-
-  //extra
+  //extra testing functions : write here
 }
 
 void start() {
@@ -534,7 +534,6 @@ askAdminOptions(){
 }
 
 /* FORMATTING
-
 \u001b[1m: Sets the text style to bold.
 \u001b[0m: Resets the text style and color to the default.
 \x1B[4m: uderline
