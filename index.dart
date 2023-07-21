@@ -29,10 +29,9 @@ void main() {
   start();
 
   // asking option from user after after show products
-  if(isCustomer){
+  if (isCustomer) {
     askOptions();
-  }
-  else{
+  } else {
     askAdminOptions();
   }
 
@@ -270,7 +269,7 @@ addToCart() {
   var prodId = productId.toLowerCase();
 
   var cartLength = accessedCart.length;
-  accessedCart.add({'item' : prodId});
+  accessedCart.add({'item': prodId});
 
   stdout.write("Enter Product Quantity: ");
   var productquantity = stdin.readLineSync()!;
@@ -302,24 +301,24 @@ showCart() {
     for (var cartItem in accessedCart) {
       // print(cartItem);
       stdout.write(
-          '${getItemName(cartItem['item'], "name")} (${cartItem['quantity']}) | ');
+          '${getItemDetails(cartItem['item'], "name")} (${cartItem['quantity']}) | ');
       // stdout.write(cartItem['item'] );
     }
     print(" ");
   }
 }
 
-dynamic getItemName(String prodId, String attribute) {
+dynamic getItemDetails(String prodId, String attribute) {
   if (prodId[0].toLowerCase() == "b") {
-    return (getName(prodId, bags, attribute));
+    return (getDetails(prodId, bags, attribute));
   } else if (prodId[0] == "f") {
-    return (getName(prodId, fragrance, attribute));
+    return (getDetails(prodId, fragrance, attribute));
   } else {
-    return (getName(prodId, jewelry, attribute));
+    return (getDetails(prodId, jewelry, attribute));
   }
 }
 
-dynamic getName(String id, List productList, String attribute) {
+dynamic getDetails(String id, List productList, String attribute) {
   bool isFound = false;
   var requiredName;
   var requiredPrice;
@@ -431,9 +430,9 @@ generateInvoice() {
   num shippingCharges = 400;
   for (var item in loggedInCustomer['cart']) {
     var itemId = item['item'];
-    var itemName = getItemName(item['item'], "name");
+    var itemName = getItemDetails(item['item'], "name");
     var itemQuantity = item['quantity'];
-    var itemPrice = getItemName(item['item'], "price");
+    var itemPrice = getItemDetails(item['item'], "price");
     total += itemPrice;
     print(
         '\u001b[37m   ${itemId} $space ${itemName} $space ${itemQuantity} $space   ${itemPrice}\u001b[0m');
@@ -529,9 +528,17 @@ String toSentenceCase(String input) {
   return '$firstLetter$restOfString';
 }
 
-askAdminOptions(){
+askAdminOptions() {
   print("Hello Admin");
+  logoutAdmin();
 }
+
+logoutAdmin() {
+  print("\u001b[1m\u001b[32mSuccessfully Logout\u001b[0m");
+
+  askUser();
+}
+
 
 /* FORMATTING
 \u001b[1m: Sets the text style to bold.
