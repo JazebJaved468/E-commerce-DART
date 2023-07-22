@@ -21,7 +21,6 @@ dynamic loggedInCustomer = customers[
 dynamic loggedInCustomerPosition = 0;
 // "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
-// bool isAdmin = false;
 bool isCustomer = false;
 
 void main() {
@@ -34,10 +33,6 @@ void main() {
 
   //extra testing functions : write here
 
-  // String? inp = stdin.readLineSync();
-  // String i = inp ?? "-2";
-  // print(isIdExist(i));
-  // addToCart();
 }
 
 void start() {
