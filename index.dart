@@ -274,28 +274,39 @@ addToCart() {
   var productId = stdin.readLineSync()!;
   var prodId = productId.toLowerCase();
 
-  var productquantity;
+  var productquantity = "-1";
 
   if (isIdExist(prodId)) {
     stdout.write("Enter Product Quantity: ");
-    var productquantity = stdin.readLineSync()!;
-    print(accessedCart);
-    List existData = itemAlreadyInCart(prodId, accessedCart);
-    if (existData[0]) {
-      // print(existData);
-      // print(accessedCart[existData[1]]['quantity'].runtimeType);
-      accessedCart[existData[1]]['quantity'] =
-          (int.parse(accessedCart[existData[1]]['quantity']) +
+    productquantity = stdin.readLineSync()!;
+    while ((int.parse(productquantity) < 1)) {
+      print("\u001b[31mEnter Product Quantity atleast greater than 0\u001b[0m ");
+      stdout.write("Enter Product Quantity: ");
+      productquantity = stdin.readLineSync()!;
+    }
+
+    // Checking if product is available in inventory or not
+    List availableInv = checkInventory(prodId, productquantity);
+    if (availableInv[0] == false) {
+      print(
+          "\u001b[1m\u001b[31mSorry, Enough number of items are not available right now... Enter some less amount\u001b[0m");
+      print(
+          "\u001b[1m\u001b[31mAvailble Quantity of the selected item : ${availableInv[1]} \u001b[0m");
+      stdout.write("Enter Product Quantity: ");
+      productquantity = stdin.readLineSync()!;
+    } else {}
+
+    // Checking if product already exist in cart or not
+    List existInCart = itemAlreadyInCart(prodId, accessedCart);
+    if (existInCart[0]) {
+      accessedCart[existInCart[1]]['quantity'] =
+          (int.parse(accessedCart[existInCart[1]]['quantity']) +
                   int.parse(productquantity))
               .toString();
-      // print(accessedCart[existData[1]]['quantity']);
-      // print(accessedCart[existData[1]]['quantity'].runtimeType);
     } else {
       int cartLength = accessedCart.length;
       accessedCart.add({'item': prodId});
-      // print( accessedCart[cartLength]['quantity']);
       accessedCart[cartLength]['quantity'] = productquantity;
-      // print(accessedCart[cartLength]['quantity'].runtimeType);
     }
 
     print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
@@ -308,19 +319,44 @@ addToCart() {
   }
 }
 
-reduceInventory(String prodId, String prodQuantity){
-if (prodId[0] == "b") {
+List checkInventory(String prodId, String prodQuan) {
+  if (prodId[0] == "b") {
+    return (checkItem(prodId, prodQuan, bags));
+  } else if (prodId[0] == "f") {
+    return (checkItem(prodId, prodQuan, fragrance));
+  } else {
+    return (checkItem(prodId, prodQuan, jewelry));
+  }
+}
+
+List checkItem(String prodId, String prodQuantity, List prodList) {
+  bool isAvailable = true;
+  int itemsAvailable = 0;
+  for (var product in prodList) {
+    if (product['id'] == prodId) {
+      itemsAvailable = product['quantity'];
+      if (product['quantity'] < int.parse(prodQuantity)) {
+        isAvailable = false;
+      }
+    }
+  }
+
+  return [isAvailable, itemsAvailable];
+}
+
+reduceInventory(String prodId, String prodQuantity) {
+  if (prodId[0] == "b") {
     reduceItem(prodId, prodQuantity, bags);
   } else if (prodId[0] == "f") {
     reduceItem(prodId, prodQuantity, fragrance);
   } else {
     reduceItem(prodId, prodQuantity, jewelry);
-  } 
+  }
 }
 
-reduceItem(String prodId, String prodQuantity, List prodList){
+reduceItem(String prodId, String prodQuantity, List prodList) {
   for (var product in prodList) {
-    if(product['id'] == prodId){
+    if (product['id'] == prodId) {
       print(product['quantity']);
       product['quantity'] -= int.parse(prodQuantity);
       print(product['quantity']);
