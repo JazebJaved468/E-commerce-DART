@@ -8,6 +8,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Gold',
     'finish': 'Polished',
     'brand': 'ABC Jewelers',
+          'quantity' : 54
   },
   {
     'id': 'j2',
@@ -18,6 +19,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Silver',
     'finish': 'Matte',
     'brand': 'XYZ Accessories',
+          'quantity' : 20
   },
   {
     'id': 'j3',
@@ -28,6 +30,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Pearl',
     'finish': 'Glossy',
     'brand': 'PQR Jewelers',
+          'quantity' : 23
   },
   {
     'id': 'j4',
@@ -38,6 +41,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Rose Gold',
     'finish': 'Polished',
     'brand': 'LMN Accessories',
+          'quantity' : 23
   },
   {
     'id': 'j5',
@@ -48,6 +52,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'White Gold',
     'finish': 'Sparkling',
     'brand': 'RST Gems',
+          'quantity' : 26
   },
   {
     'id': 'j6',
@@ -58,6 +63,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Silver',
     'finish': 'Textured',
     'brand': 'UVW Jewels',
+          'quantity' : 20
   },
   {
     'id': 'j7',
@@ -68,6 +74,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'White Gold',
     'finish': 'Polished',
     'brand': 'XYZ Jewelers',
+          'quantity' : 45
   },
   {
     'id': 'j8',
@@ -78,6 +85,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Gold',
     'finish': 'Polished',
     'brand': 'ABC Jewels',
+          'quantity' : 40
   },
   {
     'id': 'j9',
@@ -88,6 +96,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'White Gold',
     'finish': 'Shiny',
     'brand': 'XYZ Luxury',
+          'quantity' : 20
   },
   {
     'id': 'j10',
@@ -98,6 +107,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Yellow Gold',
     'finish': 'Polished',
     'brand': 'PQR Gems',
+          'quantity' : 24
   },
   {
     'id': 'j11',
@@ -108,6 +118,7 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Silver',
     'finish': 'Brushed',
     'brand': 'LMN Jewelry',
+          'quantity' : 30
   },
   {
     'id': 'j12',
@@ -118,5 +129,6 @@ List<Map<String, dynamic>> jewelry = [
     'material': 'Sterling Silver',
     'finish': 'Glossy',
     'brand': 'RST Designs',
+          'quantity' : 20
   }
 ];

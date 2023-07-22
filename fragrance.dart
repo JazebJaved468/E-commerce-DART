@@ -7,6 +7,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Rose', 'Jasmine', 'Lily of the Valley'],
       'longevity': 'Medium',
       'brand': 'ABC Perfumes',
+            'quantity' : 36
     },
     {'id' : 'f2',
       'name': 'Citrus Zest',
@@ -16,6 +17,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Orange', 'Lemon', 'Bergamot'],
       'longevity': 'Long',
       'brand': 'XYZ Fragrances',
+            'quantity' : 89
     },
     {'id' : 'f3',
       'name': 'Oriental Spice',
@@ -25,6 +27,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Vanilla', 'Cinnamon', 'Amber'],
       'longevity': 'Long',
       'brand': 'PQR Fragrances',
+            'quantity' : 28
     },
     {'id' : 'f4',
       'name': 'Fresh Breeze',
@@ -34,6 +37,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Bergamot', 'Green Tea', 'Mint'],
       'longevity': 'Medium',
       'brand': 'LMN Perfumes',
+            'quantity' : 10
     },
     {'id' : 'f5',
       'name': 'Woody Serenade',
@@ -43,6 +47,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Cedarwood', 'Sandalwood', 'Patchouli'],
       'longevity': 'Long',
       'brand': 'RST Scents',
+            'quantity' : 30
     },
     {'id' : 'f6',
       'name': 'Romantic Blossoms',
@@ -52,6 +57,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Rose', 'Peony', 'Magnolia'],
       'longevity': 'Medium',
       'brand': 'UVW Perfumery',
+            'quantity' : 20
     },
     {'id' : 'f7',
       'name': 'Aquatic Splash',
@@ -61,6 +67,7 @@ List<Map<String, dynamic>> fragrance = [
       'ingredients': ['Sea Breeze', 'Water Lily', 'Musk'],
       'longevity': 'Medium',
       'brand': 'XYZ Scents',
+            'quantity' : 12
     }
 
 ];

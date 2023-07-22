@@ -7,6 +7,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Leather',
       'design': 'Classic',
       'brand': 'ABC Company',
+      'quantity' : 20
     },
     {'id' : 'b2',
       'name': 'Shoulder Bag',
@@ -16,6 +17,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Faux Leather',
       'design': 'Casual',
       'brand': 'XYZ Brand',
+            'quantity' : 30
     },
     {'id' : 'b3',
       'name': 'Crossbody Bag',
@@ -25,6 +27,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Nylon',
       'design': 'Sporty',
       'brand': 'DEF Accessories',
+            'quantity' : 20
     },
     {'id' : 'b4',
       'name': 'Clutch',
@@ -34,6 +37,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Metallic',
       'design': 'Elegant',
       'brand': 'GHI Fashion',
+            'quantity' : 40
     },
     {'id' : 'b5',
       'name': 'Backpack',
@@ -43,6 +47,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Canvas',
       'design': 'Urban',
       'brand': 'JKL Outdoors',
+            'quantity' : 21
     },
         {'id' : 'b6',
       'name': 'Satchel',
@@ -52,6 +57,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Faux Leather',
       'design': 'Sophisticated',
       'brand': 'MNO Collection',
+            'quantity' : 90
     },
     {'id' : 'b7',
       'name': 'Bucket Bag',
@@ -61,6 +67,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Suede',
       'design': 'Bohemian',
       'brand': 'PQR Accessories',
+            'quantity' : 23
     },
     {'id' : 'b8',
       'name': 'Wristlet',
@@ -70,6 +77,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Metallic',
       'design': 'Chic',
       'brand': 'STU Fashion',
+            'quantity' : 19
     },
     {'id' : 'b9',
       'name': 'Tote Backpack',
@@ -79,6 +87,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Leather',
       'design': 'Versatile',
       'brand': 'VWX Outdoors',
+            'quantity' : 35
     },
     {'id' : 'b10',
       'name': 'Evening Clutch',
@@ -88,6 +97,7 @@ List<Map<String, dynamic>> bags = [
       'material': 'Velvet',
       'design': 'Glamorous',
       'brand': 'YZ Accessories',
+            'quantity' : 25
     },
     // Add more bag maps here...
   ];

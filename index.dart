@@ -30,12 +30,18 @@ void main() {
 
   // asking option from user after after show products
   if (isCustomer) {
+    print("Asking options");
     askOptions();
   } else {
     askAdminOptions();
   }
 
   //extra testing functions : write here
+
+  // String? inp = stdin.readLineSync();
+  // String i = inp ?? "-2";
+  // print(isIdExist(i));
+  // addToCart();
 }
 
 void start() {
@@ -127,7 +133,7 @@ void registerUser() {
     'cart': []
   });
 
-  print("\u001b[1m\u001b[32m You are successfully registered\u001b[0m");
+  print("\u001b[1m\u001b[32mYou are successfully registered\u001b[0m");
   // asking user for login
   askUser();
 }
@@ -268,14 +274,100 @@ addToCart() {
   var productId = stdin.readLineSync()!;
   var prodId = productId.toLowerCase();
 
-  var cartLength = accessedCart.length;
-  accessedCart.add({'item': prodId});
+  var productquantity;
 
-  stdout.write("Enter Product Quantity: ");
-  var productquantity = stdin.readLineSync()!;
-  accessedCart[cartLength]['quantity'] = productquantity;
-  print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
-  showCart();
+  if (isIdExist(prodId)) {
+    stdout.write("Enter Product Quantity: ");
+    var productquantity = stdin.readLineSync()!;
+    print(accessedCart);
+    List existData = itemAlreadyInCart(prodId, accessedCart);
+    if (existData[0]) {
+      // print(existData);
+      // print(accessedCart[existData[1]]['quantity'].runtimeType);
+      accessedCart[existData[1]]['quantity'] =
+          (int.parse(accessedCart[existData[1]]['quantity']) +
+                  int.parse(productquantity))
+              .toString();
+      // print(accessedCart[existData[1]]['quantity']);
+      // print(accessedCart[existData[1]]['quantity'].runtimeType);
+    } else {
+      int cartLength = accessedCart.length;
+      accessedCart.add({'item': prodId});
+      // print( accessedCart[cartLength]['quantity']);
+      accessedCart[cartLength]['quantity'] = productquantity;
+      // print(accessedCart[cartLength]['quantity'].runtimeType);
+    }
+
+    print("\u001b[1m\u001b[35mItem Successfully Added To Cart...\u001b[0m");
+    showCart();
+    reduceInventory(prodId, productquantity);
+  } else {
+    print(
+        "\u001b[1m\u001b[31mSorry, Product Doesnot Exist... Write correct ID\u001b[0m");
+    addToCart();
+  }
+}
+
+reduceInventory(String prodId, String prodQuantity){
+if (prodId[0] == "b") {
+    reduceItem(prodId, prodQuantity, bags);
+  } else if (prodId[0] == "f") {
+    reduceItem(prodId, prodQuantity, fragrance);
+  } else {
+    reduceItem(prodId, prodQuantity, jewelry);
+  } 
+}
+
+reduceItem(String prodId, String prodQuantity, List prodList){
+  for (var product in prodList) {
+    if(product['id'] == prodId){
+      print(product['quantity']);
+      product['quantity'] -= int.parse(prodQuantity);
+      print(product['quantity']);
+    }
+  }
+}
+
+List itemAlreadyInCart(String id, List cart) {
+  bool alreadyExist = false;
+  var indexwhereExist = -1;
+  for (var product in cart) {
+    if (product['item'] == id) {
+      alreadyExist = true;
+      indexwhereExist = cart.indexOf(product);
+    }
+  }
+  print(cart);
+  return [alreadyExist, indexwhereExist];
+}
+
+isIdExist(String prodId) {
+  bool idFound = false;
+  if (prodId[0] == "b") {
+    idFound = checkId(prodId, bags);
+  } else if (prodId[0] == "f") {
+    idFound = checkId(prodId, fragrance);
+  } else if (prodId[0] == "j") {
+    idFound = checkId(prodId, jewelry);
+  } else {
+    idFound = false;
+  }
+
+  return idFound;
+}
+
+bool checkId(String pid, List prodList) {
+  bool isFound = false;
+  for (var product in prodList) {
+    if (isFound == false) {
+      if (pid == product['id']) {
+        isFound = true;
+      }
+    } else {
+      break;
+    }
+  }
+  return isFound;
 }
 
 removeFromCart() {
@@ -296,13 +388,10 @@ showCart() {
   } else {
     stdout.write(
         "\u001b[1m\u001b[35mYour Cart contains the following products ---> \u001b[0m");
-    // ${customers[loggedInCustomerPosition]['cart']}");
 
     for (var cartItem in accessedCart) {
-      // print(cartItem);
       stdout.write(
           '${getItemDetails(cartItem['item'], "name")} (${cartItem['quantity']}) | ');
-      // stdout.write(cartItem['item'] );
     }
     print(" ");
   }
@@ -311,7 +400,7 @@ showCart() {
 dynamic getItemDetails(String prodId, String attribute) {
   if (prodId[0].toLowerCase() == "b") {
     return (getDetails(prodId, bags, attribute));
-  } else if (prodId[0] == "f") {
+  } else if (prodId[0].toLowerCase() == "f") {
     return (getDetails(prodId, fragrance, attribute));
   } else {
     return (getDetails(prodId, jewelry, attribute));
@@ -404,7 +493,7 @@ generateInvoice() {
   var space = "                ";
   var lines = "--------------------";
   print(
-      '\u001b[1m\u001b[33m================================ ORDER INVOICE ================================\u001b[0m');
+      '\u001b[1m\u001b[33m================================= ORDER INVOICE =================================\u001b[0m');
   print('\u001b[35m\x1B[4mCUSTOMER INFORMATION\u001b[0m');
   print(
       '\u001b[32mCUSTOMER NAME\u001b[0m $lines--- \u001b[37m${loggedInCustomer['name']}\u001b[0m');
@@ -450,7 +539,7 @@ generateInvoice() {
   print(
       '\u001b[1m\u001b[32m SUBTOTAL $space$space$space$space $subTotal\u001b[0m');
   print(
-      '\u001b[1m\u001b[33m============================= Thanks For Shopping =============================\u001b[0m');
+      '\u001b[1m\u001b[33m============================== Thanks For Shopping ==============================\u001b[0m');
 
   orderOptions();
 }
