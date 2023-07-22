@@ -21,7 +21,7 @@ dynamic loggedInCustomer = customers[
 dynamic loggedInCustomerPosition = 0;
 // "None"; // dynamic bcz in middle of program its datatype is changing from string to int(index of customers List)
 
-bool isAdmin = false;
+// bool isAdmin = false;
 bool isCustomer = false;
 
 void main() {
@@ -29,12 +29,8 @@ void main() {
   start();
 
   // asking option from user after after show products
-  if (isCustomer) {
-    print("Asking options");
     askOptions();
-  } else {
-    askAdminOptions();
-  }
+
 
   //extra testing functions : write here
 
@@ -53,10 +49,9 @@ void start() {
 
 void askUser() {
   print("\u001b[36mEnter (1,2,3): ");
-  print("1: Login as Admin");
-  print("2: User Register");
-  print("3: User Login");
-  print("4 (or any key): Exit \u001b[0m");
+  print("1: User Register");
+  print("2: User Login");
+  print("3 (or any key): Exit \u001b[0m");
 
   stdout.write("Enter: ");
   var userInput = stdin.readLineSync()!;
@@ -68,12 +63,10 @@ void askUser() {
 
 void doOperations(user) {
   if (user == "1") {
-    adminLogin();
+   registerUser();
   } else if (user == '2') {
-    registerUser();
-  } else if (user == '3') {
     userLogin();
-  } else {
+  }else {
     print("\u001b[1m\u001b[32m======== E-Shop Closed ========\u001b[0m");
     exit(
         0); // program exited using builtin function, wese bhi exit hojata is k begair bhi
@@ -357,9 +350,9 @@ reduceInventory(String prodId, String prodQuantity) {
 reduceItem(String prodId, String prodQuantity, List prodList) {
   for (var product in prodList) {
     if (product['id'] == prodId) {
-      print(product['quantity']);
+      // print(product['quantity']);
       product['quantity'] -= int.parse(prodQuantity);
-      print(product['quantity']);
+      // print(product['quantity']);
     }
   }
 }
@@ -373,7 +366,7 @@ List itemAlreadyInCart(String id, List cart) {
       indexwhereExist = cart.indexOf(product);
     }
   }
-  print(cart);
+  // print(cart);
   return [alreadyExist, indexwhereExist];
 }
 
@@ -557,7 +550,7 @@ generateInvoice() {
     var itemId = item['item'];
     var itemName = getItemDetails(item['item'], "name");
     var itemQuantity = item['quantity'];
-    var itemPrice = getItemDetails(item['item'], "price");
+    var itemPrice = getItemDetails(item['item'], "price") * int.parse(itemQuantity);
     total += itemPrice;
     print(
         '\u001b[37m   ${itemId} $space ${itemName} $space ${itemQuantity} $space   ${itemPrice}\u001b[0m');
